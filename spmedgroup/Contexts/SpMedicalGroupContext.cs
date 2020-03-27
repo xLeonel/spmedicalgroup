@@ -39,11 +39,11 @@ namespace spmedgroup.Contexts
                 entity.HasKey(e => e.IdClinica);
 
                 entity.HasIndex(e => e.Cnpj)
-                    .HasName("UQ__Clinica__A299CC92C9BAF92D")
+                    .HasName("UQ__Clinica__A299CC924B546EA0")
                     .IsUnique();
 
                 entity.HasIndex(e => e.NomeFantasia)
-                    .HasName("UQ__Clinica__F5389F310BC5D178")
+                    .HasName("UQ__Clinica__F5389F31CC1854E6")
                     .IsUnique();
 
                 entity.Property(e => e.Bairro)
@@ -65,12 +65,7 @@ namespace spmedgroup.Contexts
                     .HasMaxLength(255)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Estado)
-                    .IsRequired()
-                    .HasMaxLength(100)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Municipio)
+                entity.Property(e => e.Localidade)
                     .IsRequired()
                     .HasMaxLength(100)
                     .IsUnicode(false);
@@ -94,6 +89,11 @@ namespace spmedgroup.Contexts
                     .IsRequired()
                     .HasMaxLength(100)
                     .IsUnicode(false);
+
+                entity.Property(e => e.Uf)
+                    .IsRequired()
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
             });
 
             modelBuilder.Entity<Consulta>(entity =>
@@ -112,19 +112,19 @@ namespace spmedgroup.Contexts
                     .WithMany(p => p.Consulta)
                     .HasForeignKey(d => d.IdMedico)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Consulta__IdMedi__4F7CD00D");
+                    .HasConstraintName("FK__Consulta__IdMedi__619B8048");
 
                 entity.HasOne(d => d.IdSituacaoConsultaNavigation)
                     .WithMany(p => p.Consulta)
                     .HasForeignKey(d => d.IdSituacaoConsulta)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Consulta__IdSitu__5165187F");
+                    .HasConstraintName("FK__Consulta__IdSitu__6383C8BA");
 
                 entity.HasOne(d => d.IdUsuarioNavigation)
                     .WithMany(p => p.Consulta)
                     .HasForeignKey(d => d.IdUsuario)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Consulta__IdUsua__5070F446");
+                    .HasConstraintName("FK__Consulta__IdUsua__628FA481");
             });
 
             modelBuilder.Entity<Especialidade>(entity =>
@@ -132,7 +132,7 @@ namespace spmedgroup.Contexts
                 entity.HasKey(e => e.IdEspecialidade);
 
                 entity.HasIndex(e => e.NomeEspecialidade)
-                    .HasName("UQ__Especial__D6E5EBAE68BC06CF")
+                    .HasName("UQ__Especial__D6E5EBAEA880842F")
                     .IsUnique();
 
                 entity.Property(e => e.NomeEspecialidade)
@@ -146,7 +146,7 @@ namespace spmedgroup.Contexts
                 entity.HasKey(e => e.IdMedico);
 
                 entity.HasIndex(e => e.Crm)
-                    .HasName("UQ__Medico__C1FF83F7175E563F")
+                    .HasName("UQ__Medico__C1FF83F7BEA2598A")
                     .IsUnique();
 
                 entity.Property(e => e.Crm)
@@ -157,17 +157,17 @@ namespace spmedgroup.Contexts
                 entity.HasOne(d => d.IdClinicaNavigation)
                     .WithMany(p => p.Medico)
                     .HasForeignKey(d => d.IdClinica)
-                    .HasConstraintName("FK__Medico__IdClinic__46E78A0C");
+                    .HasConstraintName("FK__Medico__IdClinic__59063A47");
 
                 entity.HasOne(d => d.IdEspecialidadeNavigation)
                     .WithMany(p => p.Medico)
                     .HasForeignKey(d => d.IdEspecialidade)
-                    .HasConstraintName("FK__Medico__IdEspeci__47DBAE45");
+                    .HasConstraintName("FK__Medico__IdEspeci__59FA5E80");
 
                 entity.HasOne(d => d.IdUsuarioNavigation)
                     .WithMany(p => p.Medico)
                     .HasForeignKey(d => d.IdUsuario)
-                    .HasConstraintName("FK__Medico__IdUsuari__48CFD27E");
+                    .HasConstraintName("FK__Medico__IdUsuari__5AEE82B9");
             });
 
             modelBuilder.Entity<SituacaoConsulta>(entity =>
@@ -175,7 +175,7 @@ namespace spmedgroup.Contexts
                 entity.HasKey(e => e.IdSituacaoConsulta);
 
                 entity.HasIndex(e => e.NomeSituacaoConsulta)
-                    .HasName("UQ__Situacao__A75CE21BD95B0E16")
+                    .HasName("UQ__Situacao__A75CE21BE8F11D68")
                     .IsUnique();
 
                 entity.Property(e => e.NomeSituacaoConsulta)
@@ -189,7 +189,7 @@ namespace spmedgroup.Contexts
                 entity.HasKey(e => e.IdTipoUsuario);
 
                 entity.HasIndex(e => e.NomeTipoUsuario)
-                    .HasName("UQ__TipoUsua__C6FB90A8AC208581")
+                    .HasName("UQ__TipoUsua__C6FB90A8B80917B0")
                     .IsUnique();
 
                 entity.Property(e => e.NomeTipoUsuario)
@@ -202,11 +202,11 @@ namespace spmedgroup.Contexts
                 entity.HasKey(e => e.IdUsuario);
 
                 entity.HasIndex(e => e.Cpf)
-                    .HasName("UQ__Usuario__C1FF93094B2B30BC")
+                    .HasName("UQ__Usuario__C1FF9309A45173AD")
                     .IsUnique();
 
                 entity.HasIndex(e => e.Rg)
-                    .HasName("UQ__Usuario__3215372883D7705F")
+                    .HasName("UQ__Usuario__3215372820271225")
                     .IsUnique();
 
                 entity.Property(e => e.Bairro)
@@ -235,12 +235,7 @@ namespace spmedgroup.Contexts
                     .HasMaxLength(255)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Estado)
-                    .IsRequired()
-                    .HasMaxLength(100)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Municipio)
+                entity.Property(e => e.Localidade)
                     .IsRequired()
                     .HasMaxLength(100)
                     .IsUnicode(false);
@@ -270,11 +265,16 @@ namespace spmedgroup.Contexts
                     .HasMaxLength(255)
                     .IsUnicode(false);
 
+                entity.Property(e => e.Uf)
+                    .IsRequired()
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
                 entity.HasOne(d => d.IdTipoUsuarioNavigation)
                     .WithMany(p => p.Usuario)
                     .HasForeignKey(d => d.IdTipoUsuario)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Usuario__IdTipoU__4316F928");
+                    .HasConstraintName("FK__Usuario__IdTipoU__5535A963");
             });
         }
     }

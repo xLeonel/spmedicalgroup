@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using spmedgroup.Domains;
 using spmedgroup.Interfaces;
 using spmedgroup.Repositories;
+using spmedgroup.ViewModels;
 
 namespace spmedgroup.Controllers
 {
@@ -15,16 +16,19 @@ namespace spmedgroup.Controllers
     public class UsuarioController : ControllerBase
     {
         private IUsuarioRepository _usuarioRepository;
+        private IEnderecoRepository _enderecoRepository;
 
         public UsuarioController()
         {
             _usuarioRepository = new UsuarioRepository();
+            _enderecoRepository = new EnderecoRepository();
         }
 
-       /// <summary>
-       /// Lista de todos os usuarios
-       /// </summary>
-       /// <returns>retorna uma lista de todos os usuarios</returns>
+        /// <summary>
+        /// Lista de todos os usuarios
+        /// </summary>
+        /// <returns>retorna uma lista de todos os usuarios</returns>
+        /// <response code="200">Retorna uma lista de funcionários</response>
         [HttpGet]
         public ActionResult ListarTodosUser()
         {
@@ -66,8 +70,16 @@ namespace spmedgroup.Controllers
         [HttpPost]
         public IActionResult Cadastrar(Usuario userjson)
         {
-            _usuarioRepository.Cadastrar(userjson);
-            return Created("Criado",userjson);
+            try
+            {
+                _usuarioRepository.Cadastrar(userjson);
+                return Created("Criado", userjson);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e);
+            }
+
         }
 
         /// <summary>
@@ -79,7 +91,7 @@ namespace spmedgroup.Controllers
         [HttpPut("{id}")]
         public IActionResult Atualizar(int id, Usuario userjson)
         {
-            _usuarioRepository.Atualizar(id,userjson);
+            _usuarioRepository.Atualizar(id, userjson);
             return Ok("Atualizado");
         }
 
