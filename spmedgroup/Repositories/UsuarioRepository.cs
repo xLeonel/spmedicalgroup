@@ -10,9 +10,20 @@ namespace spmedgroup.Repositories
     {
         SpMedicalGroupContext ctx = new SpMedicalGroupContext();
 
-        public void Atualizar(int id, Usuario userjson)
+        EnderecoRepository _enderecoRepository = new EnderecoRepository();
+
+        public async void Atualizar(int id, Usuario userjson)
         {
             Usuario userSelect = ctx.Usuario.Find(id);
+
+            var endereco = await _enderecoRepository.GetAdress(userjson.Cep);
+
+            userjson.Cep = endereco.Cep;
+            userjson.Rua = endereco.Logradouro;
+            userjson.Bairro = endereco.Bairro;
+            userjson.Localidade = endereco.Localidade;
+            userjson.Uf = endereco.Uf;
+
 
             userSelect.Nome = userjson.Nome;
             userSelect.Rg = userjson.Rg;
@@ -24,8 +35,8 @@ namespace spmedgroup.Repositories
             userSelect.Bairro = userjson.Bairro;
             userSelect.Cep = userjson.Cep;
             userSelect.Numero = userjson.Numero;
-            userSelect.Estado = userjson.Estado;
-            userSelect.Municipio = userjson.Municipio;
+            userSelect.Uf = userjson.Uf;
+            userSelect.Localidade = userjson.Localidade;
             userSelect.Complemento = userjson.Complemento;
             userSelect.Telefone = userjson.Telefone;
             userSelect.IdTipoUsuario = userjson.IdTipoUsuario;
@@ -36,11 +47,19 @@ namespace spmedgroup.Repositories
 
         public Usuario BuscarUsuario(string email, string senha)
         {
-           return ctx.Usuario.FirstOrDefault(u => u.Email == email && u.Senha == senha);
+            return ctx.Usuario.FirstOrDefault(u => u.Email == email && u.Senha == senha);
         }
 
-        public void Cadastrar(Usuario userjson)
+        public async void Cadastrar(Usuario userjson)
         {
+            var endereco = await _enderecoRepository.GetAdress(userjson.Cep);
+
+            userjson.Cep = endereco.Cep;
+            userjson.Rua = endereco.Logradouro;
+            userjson.Bairro = endereco.Bairro;
+            userjson.Localidade = endereco.Localidade;
+            userjson.Uf = endereco.Uf;
+
             ctx.Usuario.Add(userjson);
             ctx.SaveChanges();
         }

@@ -36,10 +36,10 @@ namespace spmedgroup.Domains
         [DataType(DataType.Password)]
         public string Senha { get; set; }
 
-        [Required(ErrorMessage = "É necessário informar a rua")]
+        [Required(ErrorMessage = "É necessário informar a rua", AllowEmptyStrings = true)]
         public string Rua { get; set; }
 
-        [Required(ErrorMessage = "É necessário informar o bairro")]
+        [Required(ErrorMessage = "É necessário informar o bairro", AllowEmptyStrings = true)]
         public string Bairro { get; set; }
 
         [Required(ErrorMessage = "É necessário informar o cep")]
@@ -48,11 +48,11 @@ namespace spmedgroup.Domains
         [Required(ErrorMessage = "É necessário informar o numero")]
         public int Numero { get; set; }
 
-        [Required(ErrorMessage = "É necessário informar o estado")]
-        public string Estado { get; set; }
+        [Required(ErrorMessage = "É necessário informar o estado", AllowEmptyStrings = true)]
+        public string Uf { get; set; }
 
-        [Required(ErrorMessage = "É necessário informar o municipio")]
-        public string Municipio { get; set; }
+        [Required(ErrorMessage = "É necessário informar o municipio", AllowEmptyStrings = true)]
+        public string Localidade { get; set; }
 
         [Required(ErrorMessage = "É necessário informar o complemento", AllowEmptyStrings = true)]
         public string Complemento { get; set; }

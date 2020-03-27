@@ -35,10 +35,10 @@ namespace spmedgroup.Domains
         public int Numero { get; set; }
 
         [Required(ErrorMessage = "É necessário informar o estado")]
-        public string Estado { get; set; }
+        public string Uf { get; set; }
 
         [Required(ErrorMessage = "É necessário informar o municipio")]
-        public string Municipio { get; set; }
+        public string Localidade { get; set; }
 
         [Required(ErrorMessage = "É necessário informar o complemento", AllowEmptyStrings = true)]
         public string Complemento { get; set; }
