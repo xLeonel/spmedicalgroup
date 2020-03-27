@@ -1,0 +1,52 @@
+--mostrar a consulta do paciente
+select c.DataConsulta, c.DescricaoPaciente, Usuario.Nome, SituacaoConsulta.NomeSituacaoConsulta
+from Consulta c
+inner join Usuario on Usuario.IdUsuario =  c.IdUsuario
+inner join SituacaoConsulta on SituacaoConsulta.IdSituacaoConsulta = c.IdSituacaoConsulta
+where Usuario.IdTipoUsuario = 2 
+
+--mostrar a consulta do paciente e seu medico
+select c.DataConsulta, c.DescricaoPaciente, Usuario.Nome as NomePaciente, SituacaoConsulta.NomeSituacaoConsulta
+from Consulta c
+inner join Usuario on Usuario.IdUsuario =  c.IdUsuario
+inner join SituacaoConsulta on SituacaoConsulta.IdSituacaoConsulta = c.IdSituacaoConsulta
+inner join Medico on Medico.IdMedico = c.IdMedico
+where Usuario.IdTipoUsuario = 1
+
+--mostrar o medico e sua respectiva especialidade
+select m.Crm, Usuario.Nome, Especialidade.NomeEspecialidade
+from Medico m
+inner join Especialidade on Especialidade.IdEspecialidade = m.IdEspecialidade
+inner join Usuario on Usuario.IdUsuario = m.IdUsuario
+
+--mostrar o medico , especialidade e a clinica
+select m.Crm, Usuario.Nome, Especialidade.NomeEspecialidade, Clinica.NomeFantasia
+from Medico m
+inner join Especialidade on Especialidade.IdEspecialidade = m.IdEspecialidade
+inner join Clinica on Clinica.IdClinica = m.IdClinica
+inner join Usuario on Usuario.IdUsuario = m.IdUsuario
+
+--converter data de nascimento em MM/DD/YYYY)
+select p.Nome ,CONVERT(varchar(10), DataNascimento, 110) AS [mm/dd/yyyy]
+from Usuario p
+
+--mostrar total de usuarios
+select count(IdUsuario)
+from Usuario
+
+--calcular idade paciente
+select	p.Nome, p.DataNascimento,
+case when DATEPART(MONTH,p.DataNascimento)<= DATEPART(MONTH,GETDATE()) AND DATEPART(DAY,p.DataNascimento)<= DATEPART(DAY,GETDATE())
+then (DATEDIFF(YEAR,p.DataNascimento,GETDATE())) else (DATEDIFF(YEAR,p.DataNascimento,GETDATE()))- 1 END AS Idade
+from Usuario p
+
+--procedure para consultar quantidade de medicos em determinada especialidade
+create procedure MedicoEspecialidade 
+@Quantd INT
+AS
+SELECT Usuario.Nome, Especialidade.NomeEspecialidade  FROM Medico
+INNER JOIN Especialidade ON Medico.IdEspecialidade = Especialidade.IdEspecialidade
+inner join Usuario on Usuario.IdUsuario = Medico.IdUsuario
+WHERE Especialidade.IdEspecialidade = @Quantd
+
+execute MedicoEspecialidade 1;
