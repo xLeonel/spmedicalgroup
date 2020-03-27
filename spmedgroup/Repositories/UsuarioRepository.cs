@@ -10,6 +10,8 @@ namespace spmedgroup.Repositories
     {
         SpMedicalGroupContext ctx = new SpMedicalGroupContext();
 
+        EnderecoRepository end = new EnderecoRepository();
+
         public void Atualizar(int id, Usuario userjson)
         {
             Usuario userSelect = ctx.Usuario.Find(id);
@@ -36,11 +38,14 @@ namespace spmedgroup.Repositories
 
         public Usuario BuscarUsuario(string email, string senha)
         {
-           return ctx.Usuario.FirstOrDefault(u => u.Email == email && u.Senha == senha);
+            return ctx.Usuario.FirstOrDefault(u => u.Email == email && u.Senha == senha);
         }
 
-        public void Cadastrar(Usuario userjson)
+        public async void Cadastrar(Usuario userjson)
         {
+            var endereco = await end.GetAdress(userjson.Cep);
+            userjson.Rua = endereco.Logradouro;
+            userjson.Bairro = endereco.Bairro;
             ctx.Usuario.Add(userjson);
             ctx.SaveChanges();
         }
