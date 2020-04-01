@@ -1,0 +1,376 @@
+{
+	"info": {
+		"_postman_id": "24baa6c5-f356-4821-8217-78772e70eef5",
+		"name": "SpMedicalGroup",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Consulta",
+			"item": [
+				{
+					"name": "ListarTodasConsulta",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:5001/api/Consulta/",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"Consulta",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ListarConsultaPorPaciente",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:5001/api/Consulta/Paciente/5",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"Consulta",
+								"Paciente",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ListarConsultaPorMedico",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:5001/api/Consulta/Medico/2",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"Consulta",
+								"Medico",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cadastrar",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"dataConsulta\" : \"2020-03-05T10:30:00\",\r\n\t\"descricaoPaciente\": \"Paciente está testando novamente\",\r\n\t\"idMedico\": 2,\r\n\t\"idUsuario\": 7,\r\n\t\"idSituacaoConsulta\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:5001/api/Consulta",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"Consulta"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Usuario",
+			"item": [
+				{
+					"name": "ListarTodosUsers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:5001/api/Usuario/",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"Usuario",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ListarTodosMedicos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:5001/api/Usuario/Medicos",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"Usuario",
+								"Medicos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ListarTodosPaciente",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:5001/api/Usuario/Pacientes",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"Usuario",
+								"Pacientes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cadastrar",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nome\": \"souUmCepApi\",\n    \"rg\": \"02.251.279-4\",\n    \"cpf\": \"630.710.098-21\",\n    \"dataNascimento\": \"03/05/2001\",\n    \"email\": \"vitor@email.com\",\n    \"senha\": \"vitor\",\n    \"rua\": \"\",\n    \"bairro\": \"\",\n    \"cep\": \"03807300\",\n    \"numero\": 488,\n    \"uf\": \"\",\n    \"localidade\": \"\",\n    \"complemento\": \"apartamento\",\n    \"telefone\": \"11 99119-5734\",\n    \"idTipoUsuario\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:5001/api/Usuario",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"Usuario"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"souUmCepApi\",\r\n    \"rg\": \"03.251.279-4\",\r\n    \"cpf\": \"130.710.098-21\",\r\n    \"dataNascimento\": \"2001-03-05T00:00:00\",\r\n    \"email\": \"vitor@email.com\",\r\n    \"senha\": \"vitor\",\r\n    \"rua\": \"\",\r\n    \"bairro\": \"\",\r\n    \"cep\": \"03807-200\",\r\n    \"numero\": 488,\r\n    \"uf\": \"\",\r\n    \"localidade\": \"\",\r\n    \"complemento\": \"casainha\",\r\n    \"telefone\": \"11 99119-5734\",\r\n    \"idTipoUsuario\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:5001/api/Usuario/14",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"Usuario",
+								"14"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deletar",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:5001/api/Usuario/15",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"Usuario",
+								"15"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Login",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n   \"email\": \"ricardo.lemos@spmedicalgroup.com.br\",\n   \"senha\": \"235225435\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:5001/api/Login",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"Login"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Medico",
+			"item": [
+				{
+					"name": "Listar",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:5001/api/Medico",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"Medico"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cadastrar",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"crm\": \"53440-SP\",\r\n\t\"idClinica\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:5001/api/Medico",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"Medico"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:5001/api/Medico",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"Medico"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
