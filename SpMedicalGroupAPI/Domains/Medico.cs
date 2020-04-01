@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using Newtonsoft.Json;
 
 namespace spmedgroup.Domains
 {
@@ -20,10 +21,10 @@ namespace spmedgroup.Domains
         [Required(ErrorMessage = "É necessário informar a clinica do medico")]
         public int? IdClinica { get; set; }
 
-        [Required(ErrorMessage = "É necessário informar a especialidade do medico")]
+        // [Required(ErrorMessage = "É necessário informar a especialidade do medico")]
         public int? IdEspecialidade { get; set; }
-        
-        [Required(ErrorMessage = "É necessário informar a as informaçoes do medico")]
+
+        // [Required(ErrorMessage = "É necessário informar a as informaçoes do medico", AllowEmptyStrings = true)]
         public int? IdUsuario { get; set; }
 
         public Clinica IdClinicaNavigation { get; set; }

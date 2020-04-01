@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using spmedgroup.Contexts;
 using spmedgroup.Domains;
 using spmedgroup.Interfaces;
@@ -28,6 +30,11 @@ namespace spmedgroup.Repositories
         {
             ctx.Especialidade.Remove(ctx.Especialidade.Find(id));
             ctx.SaveChanges();
+        }
+
+        public List<Especialidade> Listar()
+        {
+            return ctx.Especialidade.ToList();
         }
     }
 }
