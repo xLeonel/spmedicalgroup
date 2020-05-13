@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using spmedgroup.Domains;
+using SpMedicalGroupAPI.ViewModels;
 
 namespace SpMedicalGroupAPI.Interfaces
 {
@@ -7,5 +8,7 @@ namespace SpMedicalGroupAPI.Interfaces
     {
         List<Medico> Listar();
         void Cadastrar(Medico json);
+        void Deletar(int id);
+        void Atualizar(int id, MedicoViewModel json);
     }
 }

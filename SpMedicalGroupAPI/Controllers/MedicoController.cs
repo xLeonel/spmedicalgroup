@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using spmedgroup.Domains;
 using SpMedicalGroupAPI.Interfaces;
 using SpMedicalGroupAPI.Repositories;
+using SpMedicalGroupAPI.ViewModels;
 
 namespace SpMedicalGroupAPI.Controllers
 {
@@ -28,6 +29,20 @@ namespace SpMedicalGroupAPI.Controllers
         {
             _medicoRepository.Cadastrar(json);
             return Created("Cadastrado",json);
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult Deletar(int id)
+        {
+            _medicoRepository.Deletar(id);
+            return Ok("Deletado");
+        }
+
+        [HttpPut("{id}")]
+        public IActionResult Atualizar(int id, MedicoViewModel json)
+        {
+            _medicoRepository.Atualizar(id, json);
+            return Ok("Atualizado");
         }
     }
 }

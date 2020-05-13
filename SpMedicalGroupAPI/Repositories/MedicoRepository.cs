@@ -1,11 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using spmedgroup.Contexts;
 using spmedgroup.Domains;
 using spmedgroup.Repositories;
 using SpMedicalGroupAPI.Domains;
 using SpMedicalGroupAPI.Interfaces;
+using SpMedicalGroupAPI.ViewModels;
 
 namespace SpMedicalGroupAPI.Repositories
 {
@@ -15,6 +17,19 @@ namespace SpMedicalGroupAPI.Repositories
         UsuarioRepository _userRepository = new UsuarioRepository();
         CrmApiRepository _crmApiRepository = new CrmApiRepository();
         EspecialidadeRepository _especialidadeRepository = new EspecialidadeRepository();
+
+        public void Atualizar(int id, MedicoViewModel json)
+        {
+            Medico medicoSelect = ctx.Medico.Find(id);
+
+            medicoSelect.IdClinica = json.IdClinica;
+            medicoSelect.IdEspecialidade = json.IdEspecialidade;
+
+            ctx.Medico.Update(medicoSelect);
+            ctx.SaveChanges();
+
+        }
+
         public async void Cadastrar(Medico json)
         {
             var crmSplitado = json.Crm.Split("-", 2);
@@ -49,9 +64,16 @@ namespace SpMedicalGroupAPI.Repositories
                 _especialidadeRepository.Cadastrar(especialidade);
             }
 
-            //PROCURA A ESPECIALIDADE E PEGA O ID DELA E ATRIBUI AO MEU OBJETO JSON
-            Especialidade especialidadeSelect = especialidadesAtuais.Find(e => e.NomeEspecialidade == primeiraLetra);
-            json.IdEspecialidade = especialidadeSelect.IdEspecialidade;
+            if (string.IsNullOrEmpty(crm.Profissao))
+            {
+                json.IdEspecialidade = 1;
+            }
+            else
+            {
+                //PROCURA A ESPECIALIDADE E PEGA O ID DELA E ATRIBUI AO MEU OBJETO JSON
+                Especialidade especialidadeSelect = especialidadesAtuais.Find(e => e.NomeEspecialidade == primeiraLetra);
+                json.IdEspecialidade = especialidadeSelect.IdEspecialidade;
+            }
 
 
             Usuario usuario = new Usuario();
@@ -77,17 +99,27 @@ namespace SpMedicalGroupAPI.Repositories
             usuario.IdTipoUsuario = 3;
 
             _userRepository.Cadastrar(usuario);
-            
-            
+
+            await Task.Delay(2000);
+
             List<Usuario> usuariosAtuais = _userRepository.ListarTodosUsers();
-            Usuario userSelect = usuariosAtuais.FirstOrDefault(i => i.Nome == crm.Nome);
+            Usuario userSelect = usuariosAtuais.FirstOrDefault(i => i.Senha == usuario.Senha);
 
             json.IdUsuario = userSelect.IdUsuario;
 
-            
             ctx.Medico.Add(json);
             ctx.SaveChanges();
 
+        }
+
+        public void Deletar(int id)
+        {
+            Medico medico = ctx.Medico.Find(id);
+
+            ctx.Medico.Remove(medico);
+            ctx.SaveChanges();
+            
+            _userRepository.Deletar(medico.IdUsuario.GetValueOrDefault());
         }
 
         public List<Medico> Listar()
@@ -97,3 +129,4 @@ namespace SpMedicalGroupAPI.Repositories
     }
 }
 
+//TODO AO DELETAR MEDICO DELETAR O USUARIO
