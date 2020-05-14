@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using spmedgroup.Contexts;
 using spmedgroup.Domains;
 using spmedgroup.Interfaces;
@@ -8,7 +10,7 @@ namespace spmedgroup.Repositories
     {
         SpMedicalGroupContext ctx = new SpMedicalGroupContext();
 
-        public void Atualizar(int id,SituacaoConsulta situacaoConsulta)
+        public void Atualizar(int id, SituacaoConsulta situacaoConsulta)
         {
             SituacaoConsulta situacaoConsultaSelect = ctx.SituacaoConsulta.Find(id);
 
@@ -28,6 +30,12 @@ namespace spmedgroup.Repositories
         {
             ctx.SituacaoConsulta.Remove(ctx.SituacaoConsulta.Find(id));
             ctx.SaveChanges();
+        }
+
+        public List<SituacaoConsulta> Listar()
+        {
+            return ctx.SituacaoConsulta.ToList();
+
         }
     }
 }

@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using spmedgroup.Domains;
 using spmedgroup.Interfaces;
 using spmedgroup.Repositories;
 
@@ -9,7 +10,7 @@ namespace SpMedicalGroupAPI.Controllers
     [ApiController]
     public class EspecialidadeController : ControllerBase
     {
-        private IEspecialidadeRepository _especialidadeRepository; 
+        private IEspecialidadeRepository _especialidadeRepository;
 
         public EspecialidadeController()
         {
@@ -17,9 +18,31 @@ namespace SpMedicalGroupAPI.Controllers
         }
 
         [HttpGet]
-        public IActionResult Listar()
+        public IActionResult ListarTodasEspecialidade()
         {
             return Ok(_especialidadeRepository.Listar());
         }
+
+        [HttpPost]
+        public IActionResult CadastrarEspecialidade(Especialidade especialidadeJson)
+        {
+            _especialidadeRepository.Cadastrar(especialidadeJson);
+            return Created("Criado",especialidadeJson);
+        }
+
+        [HttpDelete]
+        public IActionResult DeletarEspecialidade(int id)
+        {
+            _especialidadeRepository.Deletar(id);
+            return Ok("Deletado");
+        }
+
+        [HttpPut("{id}")]
+        public IActionResult AtualizarEspecialidade(int id, Especialidade especialidadeJson)
+        {
+            _especialidadeRepository.Atualizar(id,especialidadeJson);
+            return Ok("Atualizado");
+        }
+        
     }
 }

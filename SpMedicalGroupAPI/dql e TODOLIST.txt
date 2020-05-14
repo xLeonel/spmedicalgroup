@@ -50,3 +50,7 @@ inner join Usuario on Usuario.IdUsuario = Medico.IdUsuario
 WHERE Especialidade.IdEspecialidade = @Quantd
 
 execute MedicoEspecialidade 1;
+
+
+
+TODO TESTAR SituacaoConsulta E Especialidade NO POSTMAN 
