@@ -91,7 +91,7 @@ values ('Realizada'),('Cancelada'),('Agendada')
 go
 
 insert into Especialidade
-values ('Acupuntura'),('Anestesiologia'),('Angiologia'),('Cardiologia'),('Cirurgia Cardiovascular'),('Cirurgia da Mão'),
+values ('Sem Especialidade'),('Acupuntura'),('Anestesiologia'),('Angiologia'),('Cardiologia'),('Cirurgia Cardiovascular'),('Cirurgia da Mão'),
 ('Cirurgia do Aparelho Digestivo'),('Cirurgia Geral'),('Cirurgia Pediátrica'),('Cirurgia Plástica'),('Cirurgia Torácica'),('Cirurgia Vascular'),('Dermatologia'),
 ('Radioterapia'),('Urologia'),('Pediatria'),('Psiquiatria')
 go
@@ -115,7 +115,7 @@ values	('Administrador','11.111.111-1','111.111.111-11','01/01/0001','adm@adm.co
 go
 
 insert into Medico
-values ('54356-SP','1','1', '2'),('53452-SP','1','2', '3'),('65463-SP','1','3', '4')
+values ('54356-SP','1','2', '2'),('53452-SP','1','3', '3'),('65463-SP','1','4', '4')
 go
 
 insert into Consulta (DescricaoPaciente,IdMedico,IdUsuario,IdSituacaoConsulta)
